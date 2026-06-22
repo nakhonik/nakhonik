@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Premium Muay Thai heavyweight t-shirts celebrating the history, spirit, and culture of the Art of Eight Limbs. Raw combat couture crafted in Thailand.">
+    <title>Nakhonik | Premium Muay Thai Combat Apparel</title>
+    <!-- CSS stylesheet -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- FontAwesome for Premium Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- ==========================================
+       HEADER & NAVIGATION
+       ========================================== -->
+    <header class="header" id="mainHeader">
+        <div class="container nav-container">
+            <a href="#" class="logo" id="logoLink">
+                NAKHONIK<span>.</span>
+            </a>
+            
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#collection" class="nav-link">Collection</a></li>
+                <li><a href="#spotlight" class="nav-link">Spotlight</a></li>
+                <li><a href="#size-finder" class="nav-link">Size Guide</a></li>
+                <li><a href="#heritage" class="nav-link">Heritage</a></li>
+                <li><a href="#reviews" class="nav-link">Reviews</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <button class="cart-icon-btn" id="cartToggleBtn" aria-label="Open shopping cart">
+                    <i class="fa-solid fa-square-shopping"></i>
+                    <span class="cart-count" id="cartBadgeCount">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- ==========================================
+       HERO SECTION
+       ========================================== -->
+    <section class="hero" id="heroSection">
+        <div class="container hero-grid">
+            <div class="hero-content">
+                <span class="hero-tagline">Premium Combat Couture</span>
+                <h1 class="hero-title" id="heroTitle">
+                    The Art Of
+                    <span>Eight Limbs</span>
+                </h1>
+                <p class="hero-desc" id="heroDesc">
+                    Crafted for nak muays and martial arts purists. Engineered from heavy-duty pre-shrunk washed cotton and silk-screened by hand in Thailand. Wear the heritage.
+                </p>
+                <div class="hero-cta">
+                    <a href="#collection" class="btn-primary" id="heroCtaPrimary">Shop Collection <i class="fa-solid fa-arrow-right"></i></a>
+                    <a href="#spotlight" class="btn-secondary" id="heroCtaSecondary">View Spotlight</a>
+                </div>
+            </div>
+            <div class="hero-image-wrapper">
+                <div class="hero-image-bg"></div>
+                <div class="hero-img-container" id="heroImageContainer">
+                    <img src="assets/sakyant.png" alt="Sak Yant Tiger T-Shirt" id="heroFeaturedImage">
+                    <span class="hero-badge">NEW RELEASE</span>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <span>Scroll</span>
+            <div class="scroll-mouse">
+                <div class="scroll-wheel"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+       PRODUCT GRID SECTION
+       ========================================== -->
+    <section class="products" id="collection">
+        <div class="container">
+            <h2 class="section-title"><span>Our Collection</span>The Armor</h2>
+            <p class="section-desc">Each t-shirt tells a distinct chapter of ancient Muay Thai mythology. Hand-selected vintage washes, designed for heavy combat training and street styling.</p>
+            
+            <div class="product-grid" id="productGrid">
+                
+                <!-- Product Card 1 -->
+                <article class="product-card new" data-id="sakyant">
+                    <span class="product-badge">WASHED BLACK</span>
+                    <div class="product-img-wrapper">
+                        <img src="assets/sakyant.png" alt="Sak Yant Tiger T-Shirt">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Sak Yant Tiger</h3>
+                        <p class="product-subtitle">Distressed Golden-Amber Script</p>
+                        <div class="product-bottom">
+                            <span class="product-price">$45.00</span>
+                            <button class="product-view-btn select-product-trigger" data-product="sakyant">
+                                View Details <i class="fa-solid fa-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Product Card 2 -->
+                <article class="product-card" data-id="hanuman">
+                    <span class="product-badge">VINTAGE CREAM</span>
+                    <div class="product-img-wrapper">
+                        <img src="assets/hanuman.png" alt="Hanuman's Wrath T-Shirt">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Hanuman's Wrath</h3>
+                        <p class="product-subtitle">Crimson & Charcoal Battle Art</p>
+                        <div class="product-bottom">
+                            <span class="product-price">$45.00</span>
+                            <button class="product-view-btn select-product-trigger" data-product="hanuman">
+                                View Details <i class="fa-solid fa-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Product Card 3 -->
+                <article class="product-card" data-id="kaad_chuek">
+                    <span class="product-badge">OLIVE WASH</span>
+                    <div class="product-img-wrapper">
+                        <img src="assets/kaad_chuek.png" alt="Kaad Chuek Ancient Fists T-Shirt">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Kaad Chuek Fists</h3>
+                        <p class="product-subtitle">Ancient Wrapped Hand Design</p>
+                        <div class="product-bottom">
+                            <span class="product-price">$45.00</span>
+                            <button class="product-view-btn select-product-trigger" data-product="kaad_chuek">
+                                View Details <i class="fa-solid fa-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Product Card 4 -->
+                <article class="product-card" data-id="golden_era">
+                    <span class="product-badge">RETRO BLACK</span>
+                    <div class="product-img-wrapper">
+                        <img src="assets/golden_era.png" alt="Golden Era Retrowave T-Shirt">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Golden Era Retro</h3>
+                        <p class="product-subtitle">Neon Neon-Stadium Tribute</p>
+                        <div class="product-bottom">
+                            <span class="product-price">$45.00</span>
+                            <button class="product-view-btn select-product-trigger" data-product="golden_era">
+                                View Details <i class="fa-solid fa-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+       PRODUCT SPOTLIGHT SECTION
+       ========================================== -->
+    <section class="spotlight" id="spotlight">
+        <div class="container">
+            <h2 class="section-title"><span>Interactive Spotlight</span>Close Inspection</h2>
+            <p class="section-desc">Toggle through the details, read the lore, and customize your sizing specs before checkout.</p>
+            
+            <div class="spotlight-grid" id="spotlightContent">
+                <!-- Gallery (Left) -->
+                <div class="spotlight-gallery">
+                    <div class="spotlight-main-img" id="spotlightMainImgContainer">
+                        <img src="assets/sakyant.png" alt="Featured Product" id="spotlightMainImg">
+                    </div>
+                </div>
+
+                <!-- Product Details (Right) -->
+                <div class="spotlight-detail">
+                    <span class="spotlight-category" id="spotlightCategory">HEAVYWEIGHT SERIES</span>
+                    <h3 class="spotlight-name" id="spotlightName">Sak Yant Tiger</h3>
+                    
+                    <div class="spotlight-price" id="spotlightPrice">
+                        <span>$45.00</span>
+                        <span class="price-original">$55.00</span>
+                    </div>
+
+                    <p class="spotlight-desc" id="spotlightDesc">
+                        Features the legendary twin tigers symbol of protection, power, and courage. Heavily pre-shrunk vintage wash with hand-applied ink detailing.
+                    </p>
+
+                    <div class="spotlight-story" id="spotlightStory">
+                        <h4>Cultural Lore & Meaning</h4>
+                        <p>
+                            "The Sak Yant Suea (Tiger) represents ultimate power, authority, and fearlessness. Traditionally tattooed on warriors heading into battle, it grants protection against danger and brings success in combat."
+                        </p>
+                    </div>
+
+                    <!-- Config / Selectors -->
+                    <div class="selectors-group">
+                        <!-- Color Selector -->
+                        <div class="selector-item">
+                            <h4 class="selector-title">Selected Wash: <span id="colorLabel">Washed Charcoal Black</span></h4>
+                            <div class="color-options" id="colorSelector">
+                                <button class="color-dot color-black active" data-color="Washed Charcoal Black" aria-label="Washed Charcoal Black"></button>
+                                <button class="color-dot color-washed" data-color="Vintage Fade Ash" aria-label="Vintage Fade Ash"></button>
+                            </div>
+                        </div>
+
+                        <!-- Size Selector -->
+                        <div class="selector-item">
+                            <h4 class="selector-title">Select Size: <span id="sizeLabel">M</span></h4>
+                            <div class="size-options" id="sizeSelector">
+                                <button class="size-btn" data-size="S">S</button>
+                                <button class="size-btn active" data-size="M">M</button>
+                                <button class="size-btn" data-size="L">L</button>
+                                <button class="size-btn" data-size="XL">XL</button>
+                                <button class="size-btn" data-size="XXL">XXL</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Action Row -->
+                    <div class="spotlight-actions">
+                        <div class="qty-selector">
+                            <button class="qty-btn" id="qtyMinus" aria-label="Decrease quantity"><i class="fa-solid fa-minus"></i></button>
+                            <input type="number" class="qty-input" id="qtyValue" value="1" min="1" max="10" readonly>
+                            <button class="qty-btn" id="qtyPlus" aria-label="Increase quantity"><i class="fa-solid fa-plus"></i></button>
+                        </div>
+                        <button class="btn-primary spotlight-add-btn" id="addToCartBtn">
+                            Add to Cart <i class="fa-solid fa-cart-arrow-down"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+       SIZE FINDER WIDGET
+       ========================================== -->
+    <section class="size-finder" id="size-finder">
+        <div class="container">
+            <h2 class="section-title"><span>Interactive Size Guide</span>Fit Calculator</h2>
+            <p class="section-desc">Avoid the sizing guesswork. Adjust the sliders to match your physique and see our tailored recommendation based on shrinkage and fit preference.</p>
+            
+            <div class="finder-container">
+                <div class="finder-grid">
+                    <div class="finder-inputs">
+                        
+                        <div class="input-group">
+                            <label class="input-label">Height: <span class="range-val" id="heightVal">175 cm</span></label>
+                            <input type="range" class="range-slider" id="heightSlider" min="150" max="210" value="175">
+                        </div>
+
+                        <div class="input-group">
+                            <label class="input-label">Weight: <span class="range-val" id="weightVal">75 kg</span></label>
+                            <input type="range" class="range-slider" id="weightSlider" min="50" max="120" value="75">
+                        </div>
+
+                        <div class="input-group">
+                            <label class="input-label">Desired Silhouette</label>
+                            <div class="fit-options">
+                                <button class="fit-btn" data-fit="athletic">Athletic</button>
+                                <button class="fit-btn active" data-fit="regular">Regular</button>
+                                <button class="fit-btn" data-fit="oversized">Oversized</button>
+                            </div>
+                        </div>
+
+                    </div>
+                    
+                    <div class="finder-result">
+                        <span class="result-label">Recommended Size</span>
+                        <div class="result-size" id="recommendedSize">M</div>
+                        <p class="result-text" id="recommendationExplanation">
+                            Perfect balance of length and chest room. Pre-shrunk weave ensures it maintains this shape after washing.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+       HERITAGE & CRAFTSMANSHIP
+       ========================================== -->
+    <section class="heritage" id="heritage">
+        <div class="container">
+            <h2 class="section-title"><span>Made In Thailand</span>Heavyweight Heritage</h2>
+            <p class="section-desc">Our t-shirts are not mass-produced. They are forged in Bangkok workshops using structural techniques built to endure the grind of martial arts life.</p>
+            
+            <div class="heritage-grid">
+                
+                <div class="quality-card">
+                    <div class="quality-icon"><i class="fa-solid fa-weight-hanging"></i></div>
+                    <h3 class="quality-title">240 GSM Ring-Spun Cotton</h3>
+                    <p class="quality-desc">Thick, structural, and breathable. Built with a boxy silhouette that holds its form and handles heat during heavy bags sessions.</p>
+                </div>
+
+                <div class="quality-card">
+                    <div class="quality-icon"><i class="fa-solid fa-palette"></i></div>
+                    <h3 class="quality-title">Traditional Screen Print</h3>
+                    <p class="quality-desc">We use heavy plastisol inks and traditional screen printing tables for thick, textured graphics that distress beautifully without peeling.</p>
+                </div>
+
+                <div class="quality-card">
+                    <div class="quality-icon"><i class="fa-solid fa-soap"></i></div>
+                    <h3 class="quality-title">Acid Washed & Pre-shrunk</h3>
+                    <p class="quality-desc">Enzyme-washed for a soft worn-in texture, giving each garment a slightly distressed, retro look. Zero post-wash surprises.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+       REVIEWS / TESTIMONIALS
+       ========================================== -->
+    <section class="testimonials" id="reviews">
+        <div class="container">
+            <h2 class="section-title"><span>nak muay feedback</span>Fighter Endorsed</h2>
+            <p class="section-desc">Tested inside gym lockers, professional stadiums, and lifestyle settings.</p>
+            
+            <div class="testimonials-slider">
+                <div class="testimonial-track" id="testimonialTrack">
+                    
+                    <!-- Slide 1 -->
+                    <div class="testimonial-slide">
+                        <div class="testimonial-rating">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="testimonial-text">
+                            "The Sak Yant shirt is a beast. Heavy fabric, doesn't stretch out of shape, and the print takes a massive beating in training. Hands down the highest quality Muay Thai gear I own."
+                        </p>
+                        <h4 class="testimonial-author">Liam Harrison Jr.</h4>
+                        <span class="testimonial-role">Professional Kickboxer</span>
+                    </div>
+
+                    <!-- Slide 2 -->
+                    <div class="testimonial-slide">
+                        <div class="testimonial-rating">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="testimonial-text">
+                            "Perfect fit. The sizing widget recommended L for my stats, and it's spot on. The vintage fade is incredibly clean. Looking forward to the next collection."
+                        </p>
+                        <h4 class="testimonial-author">Somrak P.</h4>
+                        <span class="testimonial-role">Muay Thai Coach, Bangkok</span>
+                    </div>
+
+                    <!-- Slide 3 -->
+                    <div class="testimonial-slide">
+                        <div class="testimonial-rating">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="testimonial-text">
+                            "The artwork is so detailed. It's not just a logo slapped on a tee, the story behind Hanuman and the wrapped fists shows they actually know the cultural roots of the sport."
+                        </p>
+                        <h4 class="testimonial-author">Alex V.</h4>
+                        <span class="testimonial-role">Striking Enthusiast</span>
+                    </div>
+
+                </div>
+
+                <div class="slider-controls">
+                    <button class="slider-btn" id="prevSlide" aria-label="Previous Testimonial"><i class="fa-solid fa-arrow-left"></i></button>
+                    <button class="slider-btn" id="nextSlide" aria-label="Next Testimonial"><i class="fa-solid fa-arrow-right"></i></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+       FOOTER
+       ========================================== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                
+                <div class="footer-brand">
+                    <h3 class="footer-logo logo">NAKHONIK<span>.</span></h3>
+                    <p class="footer-desc">
+                        Honoring the historical lineage and absolute power of Muay Thai through premium lifestyle apparel. Designed in Bangkok, worn worldwide.
+                    </p>
+                    <div class="footer-socials">
+                        <a href="#" class="social-link" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" class="social-link" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                        <a href="#" class="social-link" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="footer-title">Navigation</h4>
+                    <ul class="footer-links">
+                        <li><a href="#collection" class="footer-link">Collection</a></li>
+                        <li><a href="#spotlight" class="footer-link">Spotlight</a></li>
+                        <li><a href="#size-finder" class="footer-link">Size Guide</a></li>
+                        <li><a href="#heritage" class="footer-link">Heritage & craft</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-newsletter">
+                    <h4 class="footer-title">Join The Camp</h4>
+                    <p class="footer-desc">Get early drop notices, exclusive designs, and lore explanations directly in your inbox.</p>
+                    <form class="newsletter-form" id="newsletterForm" onsubmit="event.preventDefault(); alert('Subscribed!');">
+                        <input type="email" placeholder="Enter your email" class="newsletter-input" required id="newsletterEmail">
+                        <button type="submit" class="newsletter-btn">Join</button>
+                    </form>
+                </div>
+
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2026 NAKHONIK. All Rights Reserved.</p>
+                <p>Designed for Champions.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==========================================
+       CART DRAWER & OVERLAY (MODAL-LIKE SENSORY)
+       ========================================== -->
+    <div class="cart-overlay" id="cartOverlay"></div>
+    <aside class="cart-drawer" id="cartDrawer">
+        <div class="cart-header">
+            <h3 class="cart-header-title">Your Armor (<span id="cartHeaderCount">0</span>)</h3>
+            <button class="cart-close-btn" id="cartCloseBtn" aria-label="Close shopping cart">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+
+        <div class="cart-items-container" id="cartItemsList">
+            <!-- Dynamic Cart Items injected by JS -->
+            <div class="cart-empty-message" id="cartEmptyMessage">
+                <i class="fa-solid fa-cubes"></i>
+                <p>Your bag is currently empty.</p>
+                <a href="#collection" class="btn-primary" id="cartEmptyShopBtn">Shop the Drop</a>
+            </div>
+        </div>
+
+        <div class="cart-footer">
+            <div class="cart-subtotal">
+                <span>Subtotal</span>
+                <span class="cart-subtotal-val" id="cartSubtotalVal">$0.00</span>
+            </div>
+            <button class="btn-primary cart-checkout-btn" id="checkoutBtn">
+                Proceed to Checkout <i class="fa-solid fa-lock"></i>
+            </button>
+        </div>
+    </aside>
+
+    <!-- ==========================================
+       CHECKOUT MODAL & OVERLAY (SUCCESS SCREEN)
+       ========================================== -->
+    <div class="checkout-modal-overlay" id="checkoutModalOverlay"></div>
+    <div class="checkout-modal" id="checkoutModal">
+        <div class="checkout-success-icon">
+            <i class="fa-solid fa-shield-halved"></i>
+        </div>
+        <h3 class="checkout-title">Order Confirmed!</h3>
+        <p class="checkout-text">
+            Your battle armor has been registered. A receipt has been sent to your email. Expect tracking information from our Bangkok hub within 24 hours.
+        </p>
+        <button class="btn-primary" id="checkoutModalCloseBtn" style="margin: 0 auto; display: block;">
+            Return to Camp
+        </button>
+    </div>
+
+    <!-- JavaScript Bundle -->
+    <script src="js/app.js"></script>
+</body>
+</html>
