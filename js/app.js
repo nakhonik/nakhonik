@@ -86,6 +86,7 @@ try {
 // DOM ELEMENTS
 // ==========================================
 const mainHeader = document.getElementById("mainHeader");
+const themeToggleBtn = document.getElementById("themeToggleBtn");
 
 // Spotlight Selectors
 const spotlightMainImg = document.getElementById("spotlightMainImg");
@@ -524,11 +525,54 @@ function closeCheckoutModal() {
 checkoutModalCloseBtn.addEventListener("click", closeCheckoutModal);
 checkoutModalOverlay.addEventListener("click", closeCheckoutModal);
 
+// ==========================================
+// THEME INTERACTIVE ENGINE
+// ==========================================
+function initTheme() {
+    const savedTheme = localStorage.getItem("theme") || "dark";
+    const themeIcon = themeToggleBtn.querySelector("i");
+    
+    if (savedTheme === "light") {
+        document.documentElement.classList.add("light-theme");
+        document.body.classList.add("light-theme");
+        if (themeIcon) {
+            themeIcon.className = "fa-solid fa-moon";
+        }
+    } else {
+        document.documentElement.classList.remove("light-theme");
+        document.body.classList.remove("light-theme");
+        if (themeIcon) {
+            themeIcon.className = "fa-solid fa-sun";
+        }
+    }
+}
+
+themeToggleBtn.addEventListener("click", () => {
+    const isLight = document.documentElement.classList.contains("light-theme");
+    const themeIcon = themeToggleBtn.querySelector("i");
+    
+    if (isLight) {
+        document.documentElement.classList.remove("light-theme");
+        document.body.classList.remove("light-theme");
+        localStorage.setItem("theme", "dark");
+        if (themeIcon) {
+            themeIcon.className = "fa-solid fa-sun";
+        }
+    } else {
+        document.documentElement.classList.add("light-theme");
+        document.body.classList.add("light-theme");
+        localStorage.setItem("theme", "light");
+        if (themeIcon) {
+            themeIcon.className = "fa-solid fa-moon";
+        }
+    }
+});
 
 // ==========================================
 // INITIALIZATION
 // ==========================================
 document.addEventListener("DOMContentLoaded", () => {
+    initTheme();
     renderSpotlight();
     updateCartUI();
     calculateRecommendedSize();
