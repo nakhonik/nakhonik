@@ -4,136 +4,16 @@ const BACKEND_URL = window.location.hostname === 'localhost' || window.location.
 
 // ==========================================
 // PRODUCT DATABASE & CONFIGURATION
-// Each product maps to a Printify product.
-// After creating products in Printify, paste
-// the product_id and variant_ids below.
+// Configured dynamically from Printify API.
 // ==========================================
-//
-// HOW TO GET THESE IDs:
-//   1. Start backend: npm run dev
-//   2. Visit: http://localhost:3001/api/products
-//   3. Find your product and copy its id + variant ids
-//
-const PRINTIFY_VARIANT_MAP = {
-    sakyant: {
-        'Washed Charcoal Black|S':   100246,
-        'Washed Charcoal Black|M':   100247,
-        'Washed Charcoal Black|L':   100248,
-        'Washed Charcoal Black|XL':  100249,
-        'Washed Charcoal Black|XXL': 100250,
-        'Vintage Fade Ash|S':        100446,
-        'Vintage Fade Ash|M':        100447,
-        'Vintage Fade Ash|L':        100448,
-        'Vintage Fade Ash|XL':       100449,
-        'Vintage Fade Ash|XXL':      100450,
-    },
-    hanuman: {
-        'Vintage Cream|S':           100438,
-        'Vintage Cream|M':           100439,
-        'Vintage Cream|L':           100440,
-        'Vintage Cream|XL':          100441,
-        'Vintage Cream|XXL':         100442,
-        'Washed Charcoal Black|S':   100246,
-        'Washed Charcoal Black|M':   100247,
-        'Washed Charcoal Black|L':   100248,
-        'Washed Charcoal Black|XL':  100249,
-        'Washed Charcoal Black|XXL': 100250,
-    },
-    kaad_chuek: {
-        'Washed Olive Green|S':      100326,
-        'Washed Olive Green|M':      100327,
-        'Washed Olive Green|L':      100328,
-        'Washed Olive Green|XL':     100329,
-        'Washed Olive Green|XXL':    100330,
-        'Vintage Fade Ash|S':        100446,
-        'Vintage Fade Ash|M':        100447,
-        'Vintage Fade Ash|L':        100448,
-        'Vintage Fade Ash|XL':       100449,
-        'Vintage Fade Ash|XXL':      100450,
-    },
-    golden_era: {
-        'Classic Black|S':           100246,
-        'Classic Black|M':           100247,
-        'Classic Black|L':           100248,
-        'Classic Black|XL':          100249,
-        'Classic Black|XXL':         100250,
-        'Vintage Fade Ash|S':        100446,
-        'Vintage Fade Ash|M':        100447,
-        'Vintage Fade Ash|L':        100448,
-        'Vintage Fade Ash|XL':       100449,
-        'Vintage Fade Ash|XXL':      100450,
-    }
-};
-
-const PRODUCTS = {
-    sakyant: {
-        name: "Premium Muay Thai T-Shirt",
-        subtitle: "Distressed Golden-Amber Script",
-        price: 45.00,
-        originalPrice: 55.00,
-        category: "HEAVYWEIGHT SERIES",
-        image: "assets/sakyant.png",
-        printifyProductId: "6a3a37ae49187c91100d03f3",
-        desc: "Designed to channel the energy of double tigers, this tee is built with a heavy boxy drape. Hand-silkscreened in Bangkok with thick distressed plastisol ink on an acid-washed charcoal fabric.",
-        lore: "The Sak Yant Suea (Tiger) represents ultimate power, authority, and fearlessness. Traditionally tattooed on warriors heading into battle, it grants protection against danger and brings success in combat.",
-        washes: [
-            { name: "Washed Charcoal Black", class: "color-black" },
-            { name: "Vintage Fade Ash", class: "color-washed" }
-        ]
-    },
-    hanuman: {
-        name: "Roaring Tiger Head T-shirt",
-        subtitle: "Crimson & Charcoal Battle Art",
-        price: 45.00,
-        originalPrice: 55.00,
-        category: "LEGENDS SERIES",
-        image: "assets/hanuman.png",
-        printifyProductId: "6a3a381449187c91100d041b",
-        desc: "An tribute to the warrior monkey god Hanuman. Printed in rich crimson and charcoal on a vintage cream heavyweight tee, reflecting the ancient stone murals of Bangkok temples.",
-        lore: "Hanuman is the Hindu monkey deity representing loyalty, martial prowess, and unmatched strength. In Muay Thai culture, he is the patron spirit of fighters seeking agility, clever tactics, and raw power.",
-        washes: [
-            { name: "Vintage Cream", class: "color-cream" },
-            { name: "Washed Charcoal Black", class: "color-black" }
-        ]
-    },
-    kaad_chuek: {
-        name: "Muay Thai Fighter T-Shirt King of the Ring",
-        subtitle: "Ancient Wrapped Hand Design",
-        price: 45.00,
-        originalPrice: null,
-        category: "HERITAGE SERIES",
-        image: "assets/kaad_chuek.png",
-        printifyProductId: "6a3a37c549187c91100d0403",
-        desc: "Features a clean distressed drawing of hemp-wrapped hands (Kaad Chuek) used before boxing gloves were introduced. Printed on a soft-washed olive green heavyweight cotton canvas.",
-        lore: "In Muay Boran, fighters bound their fists in thick hemp rope ('Kaad Chuek') to protect their knuckles and increase cutting potential. This design honors the raw, unfiltered origins of traditional Thai ring combat.",
-        washes: [
-            { name: "Washed Olive Green", class: "color-green" },
-            { name: "Vintage Fade Ash", class: "color-washed" }
-        ]
-    },
-    golden_era: {
-        name: "Born Nak Muay Forged in Fire T-Shirt",
-        subtitle: "Neon Stadium Tribute",
-        price: 45.00,
-        originalPrice: 50.00,
-        category: "RETRO SERIES",
-        image: "assets/golden_era.png",
-        printifyProductId: "6a3a37c649187c91100d0404",
-        desc: "A bold retrowave design paying tribute to the legendary 1980s-90s era of Muay Thai. Printed on a classic black premium heavyweight t-shirt with vibrant neon screen printing.",
-        lore: "The Golden Era represents the pinnacle of Muay Thai competition, where legendary champions fought in packed stadiums under neon lights. This design features classic stadium graphics and neon typography.",
-        washes: [
-            { name: "Classic Black", class: "color-black" },
-            { name: "Vintage Fade Ash", class: "color-washed" }
-        ]
-    }
-};
+let PRODUCTS = {};
 
 // ==========================================
 // STATE MANAGEMENT
 // ==========================================
 let state = {
-    activeProductId: "sakyant",
-    activeWash: "Washed Charcoal Black",
+    activeProductId: "",
+    activeWash: "",
     activeSize: "M",
     activeQty: 1,
     cart: [],
@@ -216,7 +96,42 @@ window.addEventListener("scroll", () => {
     }
 });
 
-// 1. PRODUCT SPOTLIGHT SWITCHING
+// Dynamic Price and Image Mockup Updater
+function updatePriceAndImage() {
+    const product = PRODUCTS[state.activeProductId];
+    if (!product || !product.raw) return;
+    
+    const colorOption = product.raw.options.find(o => o.type === 'color' || o.name.toLowerCase() === 'colors');
+    const colorValue = colorOption ? colorOption.values.find(v => v.title === state.activeWash) : null;
+    const colorValId = colorValue ? colorValue.id : null;
+    
+    const sizeOption = product.raw.options.find(o => o.type === 'size' || o.name.toLowerCase() === 'sizes');
+    const sizeValue = sizeOption ? sizeOption.values.find(v => v.title === state.activeSize) : null;
+    const sizeValId = sizeValue ? sizeValue.id : null;
+    
+    const matchedVariant = product.raw.variants.find(v => {
+        const hasColor = colorValId ? v.options.includes(colorValId) : true;
+        const hasSize = sizeValId ? v.options.includes(sizeValId) : true;
+        return hasColor && hasSize;
+    });
+    
+    if (matchedVariant) {
+        const price = matchedVariant.price / 100;
+        spotlightPrice.innerHTML = `<span>$${price.toFixed(2)}</span>`;
+        
+        // Also update spotlight main image if variant image exists
+        const matchedImage = product.raw.images.find(img => img.variant_ids.includes(matchedVariant.id));
+        if (matchedImage) {
+            spotlightMainImg.style.opacity = 0;
+            setTimeout(() => {
+                spotlightMainImg.src = matchedImage.src;
+                spotlightMainImg.style.opacity = 1;
+            }, 100);
+        }
+    }
+}
+
+// 1. PRODUCT SPOTLIGHT SWITCHING (Printify API Adapted)
 function renderSpotlight() {
     const product = PRODUCTS[state.activeProductId];
     if (!product) return;
@@ -232,73 +147,61 @@ function renderSpotlight() {
     spotlightCategory.textContent = product.category;
     spotlightName.textContent = product.name;
     
-    // Price rendering with discount checking
-    if (product.originalPrice) {
-        spotlightPrice.innerHTML = `<span>$${product.price.toFixed(2)}</span><span class="price-original">$${product.originalPrice.toFixed(2)}</span>`;
-    } else {
-        spotlightPrice.innerHTML = `<span>$${product.price.toFixed(2)}</span>`;
-    }
+    // Base Price
+    spotlightPrice.innerHTML = `<span>$${product.price.toFixed(2)}</span><span class="price-original">$${product.originalPrice.toFixed(2)}</span>`;
 
     spotlightDesc.textContent = product.desc;
     spotlightStory.textContent = `"${product.lore}"`;
 
-    // Render colors for specific product
+    // Render colors dynamically from Printify options
     colorSelector.innerHTML = "";
     product.washes.forEach((wash, idx) => {
         const btn = document.createElement("button");
-        btn.className = `color-dot ${wash.class} ${idx === 0 ? "active" : ""}`;
+        btn.className = `color-dot ${wash.name === state.activeWash ? "active" : ""}`;
         btn.setAttribute("data-color", wash.name);
         btn.setAttribute("aria-label", wash.name);
         
+        const span = document.createElement("span");
+        span.style.backgroundColor = wash.hex;
+        btn.appendChild(span);
+        
         btn.addEventListener("click", () => {
-            document.querySelectorAll(".color-dot").forEach(d => d.classList.remove("active"));
+            colorSelector.querySelectorAll(".color-dot").forEach(d => d.classList.remove("active"));
             btn.classList.add("active");
             state.activeWash = wash.name;
             colorLabel.textContent = wash.name;
+            updatePriceAndImage();
         });
 
         colorSelector.appendChild(btn);
     });
 
-    // Reset spotlight local states
-    state.activeWash = product.washes[0].name;
-    colorLabel.textContent = product.washes[0].name;
+    // Render sizes dynamically from Printify options
+    sizeSelector.innerHTML = "";
+    const sizeOption = product.raw.options.find(o => o.type === 'size' || o.name.toLowerCase() === 'sizes');
+    if (sizeOption) {
+        sizeOption.values.forEach((sizeVal, idx) => {
+            const btn = document.createElement("button");
+            btn.className = `size-btn ${sizeVal.title === state.activeSize ? "active" : ""}`;
+            btn.setAttribute("data-size", sizeVal.title);
+            btn.textContent = sizeVal.title;
+            
+            btn.addEventListener("click", () => {
+                sizeSelector.querySelectorAll(".size-btn").forEach(b => b.classList.remove("active"));
+                btn.classList.add("active");
+                state.activeSize = sizeVal.title;
+                sizeLabel.textContent = sizeVal.title;
+                updatePriceAndImage();
+            });
+
+            sizeSelector.appendChild(btn);
+        });
+    }
 
     state.activeQty = 1;
     qtyValue.value = 1;
-
-    // Maintain size selection
-    const activeSizeBtn = sizeSelector.querySelector(`.size-btn[data-size="${state.activeSize}"]`);
-    if (activeSizeBtn) {
-        sizeSelector.querySelectorAll(".size-btn").forEach(b => b.classList.remove("active"));
-        activeSizeBtn.classList.add("active");
-        sizeLabel.textContent = state.activeSize;
-    }
+    updatePriceAndImage();
 }
-
-// Attach event listeners to collection cards
-document.querySelectorAll(".select-product-trigger").forEach(btn => {
-    btn.addEventListener("click", (e) => {
-        e.preventDefault();
-        const pId = btn.getAttribute("data-product");
-        state.activeProductId = pId;
-        renderSpotlight();
-        
-        // Scroll smoothly to spotlight section
-        document.getElementById("spotlight").scrollIntoView({ behavior: "smooth" });
-    });
-});
-
-// Spotlight Size click handler
-sizeSelector.querySelectorAll(".size-btn").forEach(btn => {
-    btn.addEventListener("click", () => {
-        sizeSelector.querySelectorAll(".size-btn").forEach(b => b.classList.remove("active"));
-        btn.classList.add("active");
-        const size = btn.getAttribute("data-size");
-        state.activeSize = size;
-        sizeLabel.textContent = size;
-    });
-});
 
 // Spotlight quantity controllers
 qtyMinus.addEventListener("click", () => {
@@ -409,10 +312,10 @@ function updateCartUI() {
     }
 }
 
-// Add to cart from Spotlight
+// Add to cart from Spotlight (Printify API Adapted)
 addToCartBtn.addEventListener("click", () => {
     const product = PRODUCTS[state.activeProductId];
-    if (!product) return;
+    if (!product || !product.raw) return;
 
     // Check if duplicate exists
     const existingIndex = state.cart.findIndex(item => 
@@ -424,19 +327,33 @@ addToCartBtn.addEventListener("click", () => {
     if (existingIndex > -1) {
         state.cart[existingIndex].qty = Math.min(state.cart[existingIndex].qty + state.activeQty, 10);
     } else {
-        // Look up Printify variant ID for this wash + size combo
-        const variantKey = `${state.activeWash}|${state.activeSize}`;
-        const variantId = PRINTIFY_VARIANT_MAP[state.activeProductId]?.[variantKey] || null;
+        // Look up Printify variant ID
+        const colorOption = product.raw.options.find(o => o.type === 'color' || o.name.toLowerCase() === 'colors');
+        const colorValue = colorOption ? colorOption.values.find(v => v.title === state.activeWash) : null;
+        const colorValId = colorValue ? colorValue.id : null;
+        
+        const sizeOption = product.raw.options.find(o => o.type === 'size' || o.name.toLowerCase() === 'sizes');
+        const sizeValue = sizeOption ? sizeOption.values.find(v => v.title === state.activeSize) : null;
+        const sizeValId = sizeValue ? sizeValue.id : null;
+        
+        const matchedVariant = product.raw.variants.find(v => {
+            const hasColor = colorValId ? v.options.includes(colorValId) : true;
+            const hasSize = sizeValId ? v.options.includes(sizeValId) : true;
+            return hasColor && hasSize;
+        });
+        
+        const variantId = matchedVariant ? matchedVariant.id : null;
+        const price = matchedVariant ? (matchedVariant.price / 100) : product.price;
+        const image = product.raw.images.find(img => img.variant_ids.includes(variantId))?.src || product.image;
 
         state.cart.push({
             id: state.activeProductId,
             name: product.name,
-            price: product.price,
-            image: product.image,
+            price: price,
+            image: image,
             wash: state.activeWash,
             size: state.activeSize,
             qty: state.activeQty,
-            // Printify fields (used at checkout)
             printifyProductId: product.printifyProductId,
             variantId: variantId
         });
@@ -818,11 +735,141 @@ themeToggleBtn.addEventListener("click", () => {
 });
 
 // ==========================================
+// DYNAMIC PRINTIFY LOADER ENGINE
+// ==========================================
+async function fetchProducts() {
+    try {
+        const res = await fetch(`${BACKEND_URL}/api/products`);
+        const json = await res.json();
+        const data = json.data || [];
+        
+        if (data.length === 0) {
+            document.getElementById("productGrid").innerHTML = "<p style='grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 4rem 0;'>No products found in store.</p>";
+            return;
+        }
+        
+        PRODUCTS = {};
+        data.forEach(p => {
+            let name = p.title;
+            let subtitle = "Premium Combat Couture";
+            if (p.title.includes("|")) {
+                const parts = p.title.split("|");
+                name = parts[0].trim();
+                subtitle = parts[1].trim();
+            }
+            
+            const firstVariant = p.variants.find(v => v.is_enabled) || p.variants[0];
+            const basePrice = firstVariant ? (firstVariant.price / 100) : 45.00;
+            
+            const colorOption = p.options.find(o => o.type === 'color' || o.name.toLowerCase() === 'colors');
+            const washes = [];
+            if (colorOption) {
+                colorOption.values.forEach(val => {
+                    washes.push({
+                        name: val.title,
+                        hex: (val.colors && val.colors.length > 0) ? val.colors[0] : '#18181b'
+                    });
+                });
+            } else {
+                washes.push({ name: "Default Wash", hex: "#18181b" });
+            }
+            
+            PRODUCTS[p.id] = {
+                id: p.id,
+                name: name,
+                subtitle: subtitle,
+                price: basePrice,
+                originalPrice: basePrice * 1.25,
+                category: p.tags.includes("Legends") ? "LEGENDS SERIES" : "HEAVYWEIGHT SERIES",
+                image: p.images.find(img => img.is_default)?.src || p.images[0].src,
+                printifyProductId: p.id,
+                desc: p.description.split("\n")[0] || "Premium combat clothing crafted for nak muays.",
+                lore: p.description.includes("🐅") ? p.description.split("🐅")[1] || "Wear the heritage." : "Designed for fighters who value lineage, power, and ultimate durability.",
+                washes: washes,
+                raw: p
+            };
+        });
+        
+        renderProductGrid();
+        
+        // Auto set default active product
+        const productIds = Object.keys(PRODUCTS);
+        if (productIds.length > 0) {
+            state.activeProductId = productIds[0];
+            const activeProd = PRODUCTS[state.activeProductId];
+            state.activeWash = activeProd.washes[0].name;
+            const sizeOption = activeProd.raw.options.find(o => o.type === 'size' || o.name.toLowerCase() === 'sizes');
+            state.activeSize = sizeOption ? sizeOption.values[0].title : "M";
+            
+            renderSpotlight();
+            
+            // Dynamic hero image mapping
+            const heroFeaturedImage = document.getElementById("heroFeaturedImage");
+            if (heroFeaturedImage) {
+                heroFeaturedImage.src = activeProd.image;
+                heroFeaturedImage.alt = activeProd.name;
+            }
+        }
+        
+    } catch (err) {
+        console.error("Failed to load products:", err);
+        document.getElementById("productGrid").innerHTML = "<p style='grid-column: 1/-1; text-align: center; color: var(--accent-red); padding: 4rem 0;'>Connection error. Please try again later.</p>";
+    }
+}
+
+function renderProductGrid() {
+    const grid = document.getElementById("productGrid");
+    grid.innerHTML = "";
+    
+    Object.values(PRODUCTS).forEach((p, idx) => {
+        const card = document.createElement("article");
+        card.className = `product-card ${idx === 0 ? "new" : ""}`;
+        card.setAttribute("data-id", p.id);
+        
+        card.innerHTML = `
+            ${idx === 0 ? '<span class="product-badge">NEW RELEASE</span>' : ''}
+            <div class="product-img-wrapper">
+                <img src="${p.image}" alt="${p.name}">
+            </div>
+            <div class="product-info">
+                <h3 class="product-title">${p.name}</h3>
+                <p class="product-subtitle">${p.subtitle}</p>
+                <div class="product-bottom">
+                    <span class="product-price">$${p.price.toFixed(2)}</span>
+                    <button class="product-view-btn select-product-trigger" data-product="${p.id}">
+                        View Details <i class="fa-solid fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        `;
+        grid.appendChild(card);
+    });
+    
+    grid.querySelectorAll(".select-product-trigger").forEach(btn => {
+        btn.addEventListener("click", (e) => {
+            e.preventDefault();
+            const pId = btn.getAttribute("data-product");
+            state.activeProductId = pId;
+            
+            const product = PRODUCTS[pId];
+            if (product) {
+                state.activeWash = product.washes[0].name;
+                const sizeOption = product.raw.options.find(o => o.type === 'size' || o.name.toLowerCase() === 'sizes');
+                state.activeSize = sizeOption ? sizeOption.values[0].title : "M";
+            }
+            
+            renderSpotlight();
+            document.getElementById("spotlight").scrollIntoView({ behavior: "smooth" });
+        });
+    });
+}
+
+// ==========================================
 // INITIALIZATION
 // ==========================================
 document.addEventListener("DOMContentLoaded", () => {
     initTheme();
-    renderSpotlight();
+    fetchProducts();
     updateCartUI();
     calculateRecommendedSize();
 });
