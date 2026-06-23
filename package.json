@@ -1,0 +1,30 @@
+{
+  "name": "nakhonik",
+  "version": "1.0.0",
+  "description": "Nakhonik — Premium Muay Thai Apparel backend (Printify POD + Stripe)",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nakhonik/nakhonik.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/nakhonik/nakhonik/issues"
+  },
+  "homepage": "https://github.com/nakhonik/nakhonik#readme",
+  "dependencies": {
+    "axios": "^1.18.1",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "stripe": "^22.2.3"
+  }
+}

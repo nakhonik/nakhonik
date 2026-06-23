@@ -1,6 +1,72 @@
+const BACKEND_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+    ? 'http://localhost:3001'
+    : '';
+
 // ==========================================
 // PRODUCT DATABASE & CONFIGURATION
+// Each product maps to a Printify product.
+// After creating products in Printify, paste
+// the product_id and variant_ids below.
 // ==========================================
+//
+// HOW TO GET THESE IDs:
+//   1. Start backend: npm run dev
+//   2. Visit: http://localhost:3001/api/products
+//   3. Find your product and copy its id + variant ids
+//
+const PRINTIFY_VARIANT_MAP = {
+    // product_key: { wash_name + '|' + size : variant_id }
+    // Example (fill in real IDs from Printify):
+    sakyant: {
+        'Washed Charcoal Black|S':   null,
+        'Washed Charcoal Black|M':   null,
+        'Washed Charcoal Black|L':   null,
+        'Washed Charcoal Black|XL':  null,
+        'Washed Charcoal Black|XXL': null,
+        'Vintage Fade Ash|S':        null,
+        'Vintage Fade Ash|M':        null,
+        'Vintage Fade Ash|L':        null,
+        'Vintage Fade Ash|XL':       null,
+        'Vintage Fade Ash|XXL':      null,
+    },
+    hanuman: {
+        'Vintage Cream|S':           null,
+        'Vintage Cream|M':           null,
+        'Vintage Cream|L':           null,
+        'Vintage Cream|XL':          null,
+        'Vintage Cream|XXL':         null,
+        'Washed Charcoal Black|S':   null,
+        'Washed Charcoal Black|M':   null,
+        'Washed Charcoal Black|L':   null,
+        'Washed Charcoal Black|XL':  null,
+        'Washed Charcoal Black|XXL': null,
+    },
+    kaad_chuek: {
+        'Washed Olive Green|S':      null,
+        'Washed Olive Green|M':      null,
+        'Washed Olive Green|L':      null,
+        'Washed Olive Green|XL':     null,
+        'Washed Olive Green|XXL':    null,
+        'Vintage Fade Ash|S':        null,
+        'Vintage Fade Ash|M':        null,
+        'Vintage Fade Ash|L':        null,
+        'Vintage Fade Ash|XL':       null,
+        'Vintage Fade Ash|XXL':      null,
+    },
+    golden_era: {
+        'Classic Black|S':           null,
+        'Classic Black|M':           null,
+        'Classic Black|L':           null,
+        'Classic Black|XL':          null,
+        'Classic Black|XXL':         null,
+        'Vintage Fade Ash|S':        null,
+        'Vintage Fade Ash|M':        null,
+        'Vintage Fade Ash|L':        null,
+        'Vintage Fade Ash|XL':       null,
+        'Vintage Fade Ash|XXL':      null,
+    }
+};
+
 const PRODUCTS = {
     sakyant: {
         name: "Sak Yant Tiger",
@@ -9,6 +75,7 @@ const PRODUCTS = {
         originalPrice: 55.00,
         category: "HEAVYWEIGHT SERIES",
         image: "assets/sakyant.png",
+        printifyProductId: null, // ← paste Printify product ID here
         desc: "Designed to channel the energy of double tigers, this tee is built with a heavy boxy drape. Hand-silkscreened in Bangkok with thick distressed plastisol ink on an acid-washed charcoal fabric.",
         lore: "The Sak Yant Suea (Tiger) represents ultimate power, authority, and fearlessness. Traditionally tattooed on warriors heading into battle, it grants protection against danger and brings success in combat.",
         washes: [
@@ -23,6 +90,7 @@ const PRODUCTS = {
         originalPrice: 55.00,
         category: "LEGENDS SERIES",
         image: "assets/hanuman.png",
+        printifyProductId: null, // ← paste Printify product ID here
         desc: "An tribute to the warrior monkey god Hanuman. Printed in rich crimson and charcoal on a vintage cream heavyweight tee, reflecting the ancient stone murals of Bangkok temples.",
         lore: "Hanuman is the Hindu monkey deity representing loyalty, martial prowess, and unmatched strength. In Muay Thai culture, he is the patron spirit of fighters seeking agility, clever tactics, and raw power.",
         washes: [
@@ -37,6 +105,7 @@ const PRODUCTS = {
         originalPrice: null,
         category: "HERITAGE SERIES",
         image: "assets/kaad_chuek.png",
+        printifyProductId: null, // ← paste Printify product ID here
         desc: "Features a clean distressed drawing of hemp-wrapped hands (Kaad Chuek) used before boxing gloves were introduced. Printed on a soft-washed olive green heavyweight cotton canvas.",
         lore: "In Muay Boran, fighters bound their fists in thick hemp rope ('Kaad Chuek') to protect their knuckles and increase cutting potential. This design honors the raw, unfiltered origins of traditional Thai ring combat.",
         washes: [
@@ -51,6 +120,7 @@ const PRODUCTS = {
         originalPrice: 50.00,
         category: "RETRO SERIES",
         image: "assets/golden_era.png",
+        printifyProductId: null, // ← paste Printify product ID here
         desc: "A bold retrowave design paying tribute to the legendary 1980s-90s era of Muay Thai. Printed on a classic black premium heavyweight t-shirt with vibrant neon screen printing.",
         lore: "The Golden Era represents the pinnacle of Muay Thai competition, where legendary champions fought in packed stadiums under neon lights. This design features classic stadium graphics and neon typography.",
         washes: [
@@ -356,6 +426,10 @@ addToCartBtn.addEventListener("click", () => {
     if (existingIndex > -1) {
         state.cart[existingIndex].qty = Math.min(state.cart[existingIndex].qty + state.activeQty, 10);
     } else {
+        // Look up Printify variant ID for this wash + size combo
+        const variantKey = `${state.activeWash}|${state.activeSize}`;
+        const variantId = PRINTIFY_VARIANT_MAP[state.activeProductId]?.[variantKey] || null;
+
         state.cart.push({
             id: state.activeProductId,
             name: product.name,
@@ -363,7 +437,10 @@ addToCartBtn.addEventListener("click", () => {
             image: product.image,
             wash: state.activeWash,
             size: state.activeSize,
-            qty: state.activeQty
+            qty: state.activeQty,
+            // Printify fields (used at checkout)
+            printifyProductId: product.printifyProductId,
+            variantId: variantId
         });
     }
 
@@ -499,31 +576,205 @@ document.querySelector(".testimonials-slider").addEventListener("mouseleave", ()
     testimonialTimer = setInterval(() => moveTestimonial("next"), 8000);
 });
 
-// 5. MOCK CHECKOUT ENGINE
-checkoutBtn.addEventListener("click", () => {
-    if (state.cart.length === 0) return;
+// ==========================================
+// 5. CHECKOUT ENGINE — Stripe + Printify
+// ==========================================
 
-    // Toggle checkout success panel
-    checkoutModalOverlay.classList.add("open");
-    checkoutModal.classList.add("open");
-    
-    // Clear cart and local storage
-    state.cart = [];
-    saveCart();
-    
-    // Close cart drawer
-    cartDrawer.classList.remove("open");
-    cartOverlay.classList.remove("open");
-    document.body.classList.remove("cart-open");
-});
+// ── Stripe Setup ─────────────────────────────────────────────────────
+// Paste your Stripe PUBLISHABLE key here (safe for frontend):
+const STRIPE_PUBLISHABLE_KEY = 'pk_test_51TlQ9yQRwW9oMJJPT1IqzPW2OX05v0dBbNRECokLTXZUuRGvEHiqrNeUdVLMrJvJfbJkN8G9K948cS3BHxQPaNkl00uxl25Fqc';
 
-function closeCheckoutModal() {
-    checkoutModalOverlay.classList.remove("open");
-    checkoutModal.classList.remove("open");
+let stripeInstance = null;
+let stripeCardElement = null;
+
+function initStripe() {
+    if (typeof Stripe === 'undefined') {
+        console.warn('Stripe.js not loaded yet');
+        return;
+    }
+    stripeInstance = Stripe(STRIPE_PUBLISHABLE_KEY);
+    const elements = stripeInstance.elements();
+
+    // Style the card element to match Nakhonik's dark theme
+    const cardStyle = {
+        base: {
+            color: '#f8fafc',
+            fontFamily: '"Inter", sans-serif',
+            fontSize: '15px',
+            fontSmoothing: 'antialiased',
+            '::placeholder': { color: '#64748b' },
+            iconColor: '#ffb800'
+        },
+        invalid: {
+            color: '#f87171',
+            iconColor: '#f87171'
+        }
+    };
+
+    stripeCardElement = elements.create('card', { style: cardStyle, hidePostalCode: false });
+    stripeCardElement.mount('#stripeCardElement');
+
+    // Show card validation errors in real time
+    stripeCardElement.on('change', (event) => {
+        const displayError = document.getElementById('stripeCardErrors');
+        displayError.textContent = event.error ? event.error.message : '';
+    });
 }
 
-checkoutModalCloseBtn.addEventListener("click", closeCheckoutModal);
-checkoutModalOverlay.addEventListener("click", closeCheckoutModal);
+// ── Modal DOM references ──────────────────────────────────────────────
+const shippingModal        = document.getElementById('shippingModal');
+const shippingModalOverlay = document.getElementById('shippingModalOverlay');
+const shippingForm         = document.getElementById('shippingForm');
+const shippingCloseBtn     = document.getElementById('shippingCloseBtn');
+const orderStatusMsg       = document.getElementById('orderStatusMsg');
+
+// Open shipping form when customer clicks "Proceed to Checkout"
+checkoutBtn.addEventListener('click', () => {
+    if (state.cart.length === 0) return;
+    // Close cart drawer, open shipping form
+    cartDrawer.classList.remove('open');
+    cartOverlay.classList.remove('open');
+    document.body.classList.remove('cart-open');
+    shippingModal.classList.add('open');
+    shippingModalOverlay.classList.add('open');
+    // Mount Stripe card element when modal opens
+    if (!stripeCardElement) initStripe();
+});
+
+function closeShippingModal() {
+    shippingModal.classList.remove('open');
+    shippingModalOverlay.classList.remove('open');
+    orderStatusMsg.textContent = '';
+    orderStatusMsg.className = 'order-status-msg';
+}
+
+shippingCloseBtn.addEventListener('click', closeShippingModal);
+shippingModalOverlay.addEventListener('click', closeShippingModal);
+
+// ── Main submit: Stripe payment → Printify order ──────────────────────
+shippingForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const submitBtn = shippingForm.querySelector('.shipping-submit-btn');
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = 'Processing Payment… <i class="fa-solid fa-spinner fa-spin"></i>';
+    orderStatusMsg.textContent = '';
+    orderStatusMsg.className = 'order-status-msg';
+
+    const customerInfo = {
+        firstName: document.getElementById('ck-firstName').value.trim(),
+        lastName:  document.getElementById('ck-lastName').value.trim(),
+        email:     document.getElementById('ck-email').value.trim(),
+        phone:     document.getElementById('ck-phone').value.trim(),
+        address:   document.getElementById('ck-address').value.trim(),
+        city:      document.getElementById('ck-city').value.trim(),
+        state:     document.getElementById('ck-state').value.trim(),
+        zip:       document.getElementById('ck-zip').value.trim(),
+        country:   document.getElementById('ck-country').value.trim()
+    };
+
+    // Cart total in dollars
+    const totalAmount = state.cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+
+    // Map cart to format for backend
+    const cartItems = state.cart.map(item => ({
+        printifyProductId: item.printifyProductId,
+        variantId:         item.variantId,
+        quantity:          item.qty,
+        title:             item.name
+    }));
+
+    try {
+        // ── STEP 1: Create Stripe Payment Intent on backend ──
+        const intentRes = await fetch(`${BACKEND_URL}/api/create-payment-intent`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ amount: totalAmount, currency: 'usd', cartItems })
+        });
+        const intentData = await intentRes.json();
+
+        if (!intentData.clientSecret) {
+            throw new Error('Could not initialize payment. Please try again.');
+        }
+
+        // ── STEP 2: Confirm payment with Stripe card element ──
+        submitBtn.innerHTML = 'Confirming Payment… <i class="fa-solid fa-spinner fa-spin"></i>';
+
+        const { paymentIntent, error: stripeError } = await stripeInstance.confirmCardPayment(
+            intentData.clientSecret,
+            {
+                payment_method: {
+                    card: stripeCardElement,
+                    billing_details: {
+                        name: `${customerInfo.firstName} ${customerInfo.lastName}`,
+                        email: customerInfo.email,
+                        address: {
+                            line1: customerInfo.address,
+                            city: customerInfo.city,
+                            state: customerInfo.state,
+                            postal_code: customerInfo.zip,
+                            country: customerInfo.country
+                        }
+                    }
+                }
+            }
+        );
+
+        if (stripeError) {
+            throw new Error(stripeError.message);
+        }
+
+        if (paymentIntent.status !== 'succeeded') {
+            throw new Error('Payment was not completed. Please try again.');
+        }
+
+        // ── STEP 3: Payment confirmed — create Printify order ──
+        submitBtn.innerHTML = 'Placing Order… <i class="fa-solid fa-spinner fa-spin"></i>';
+
+        const orderRes = await fetch(`${BACKEND_URL}/api/orders`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ customerInfo, cartItems, paymentIntentId: paymentIntent.id })
+        });
+        const orderData = await orderRes.json();
+
+        if (orderData.success) {
+            // ── SUCCESS ──
+            orderStatusMsg.textContent = `✅ Payment confirmed! Order #${orderData.orderId} is now being prepared in Bangkok.`;
+            orderStatusMsg.classList.add('success');
+            state.cart = [];
+            saveCart();
+            shippingForm.reset();
+            submitBtn.innerHTML = '✅ Order Placed!';
+
+            setTimeout(() => {
+                closeShippingModal();
+                checkoutModalOverlay.classList.add('open');
+                checkoutModal.classList.add('open');
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = 'Pay & Place Order <i class="fa-solid fa-lock"></i>';
+            }, 3000);
+        } else {
+            throw new Error(orderData.error || 'Order creation failed after payment. Contact support.');
+        }
+
+    } catch (err) {
+        console.error('Checkout error:', err);
+        orderStatusMsg.textContent = `❌ ${err.message}`;
+        orderStatusMsg.classList.add('error');
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = 'Pay & Place Order <i class="fa-solid fa-lock"></i>';
+    }
+});
+
+// ── Success modal close ───────────────────────────────────────────────
+function closeCheckoutModal() {
+    checkoutModalOverlay.classList.remove('open');
+    checkoutModal.classList.remove('open');
+}
+
+checkoutModalCloseBtn.addEventListener('click', closeCheckoutModal);
+checkoutModalOverlay.addEventListener('click', closeCheckoutModal);
+
 
 // ==========================================
 // THEME INTERACTIVE ENGINE

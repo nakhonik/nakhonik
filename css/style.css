@@ -1693,3 +1693,239 @@ img {
         grid-template-columns: repeat(3, 1fr);
     }
 }
+
+/* ==========================================
+   SHIPPING / CHECKOUT FORM MODAL
+   ========================================== */
+.shipping-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(6px);
+    z-index: 200;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.shipping-modal-overlay.open {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.shipping-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -48%) scale(0.97);
+    width: min(90vw, 560px);
+    max-height: 90vh;
+    overflow-y: auto;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-top: 3px solid var(--accent-gold);
+    z-index: 201;
+    padding: 2.5rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.shipping-modal.open {
+    opacity: 1;
+    pointer-events: all;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.shipping-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.shipping-modal-title {
+    font-size: 1.4rem;
+    letter-spacing: -0.02em;
+}
+
+.shipping-close-btn {
+    color: var(--text-secondary);
+    font-size: 1.2rem;
+    padding: 0.5rem;
+    transition: var(--transition-smooth);
+}
+
+.shipping-close-btn:hover {
+    color: var(--accent-gold);
+    transform: rotate(90deg);
+}
+
+.shipping-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.shipping-form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.shipping-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.shipping-label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+}
+
+.shipping-input {
+    background: var(--bg-darkest);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    padding: 0.8rem 1rem;
+    outline: none;
+    transition: var(--transition-smooth);
+    border-radius: 0;
+}
+
+.shipping-input:focus {
+    border-color: var(--accent-gold);
+    box-shadow: 0 0 0 2px rgba(255, 184, 0, 0.1);
+}
+
+.shipping-input::placeholder {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.shipping-hint {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-top: 0.2rem;
+}
+
+.shipping-submit-btn {
+    width: 100%;
+    justify-content: center;
+    margin-top: 0.5rem;
+    font-size: 1rem;
+    padding: 1.1rem;
+}
+
+.shipping-submit-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+/* Order status feedback messages */
+.order-status-msg {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    padding: 0.75rem 1rem;
+    display: none;
+}
+
+.order-status-msg.success {
+    display: block;
+    background: rgba(34, 197, 94, 0.1);
+    border: 1px solid rgba(34, 197, 94, 0.3);
+    color: #4ade80;
+}
+
+.order-status-msg.error {
+    display: block;
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    color: #f87171;
+}
+
+@media (max-width: 480px) {
+    .shipping-form-row {
+        grid-template-columns: 1fr;
+    }
+    .shipping-modal {
+        padding: 1.5rem;
+    }
+}
+
+/* ==========================================
+   STRIPE PAYMENT ELEMENT STYLES
+   ========================================== */
+.stripe-payment-section {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 0.5rem;
+}
+
+.stripe-divider {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 0.5rem 0;
+}
+
+.stripe-divider::before,
+.stripe-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border-color);
+}
+
+.stripe-divider span {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    white-space: nowrap;
+}
+
+/* The div where Stripe injects its secure card input */
+.stripe-card-element {
+    background: var(--bg-darkest);
+    border: 1px solid var(--border-color);
+    padding: 0.9rem 1rem;
+    transition: var(--transition-smooth);
+}
+
+.stripe-card-element:focus-within {
+    border-color: var(--accent-gold);
+    box-shadow: 0 0 0 2px rgba(255, 184, 0, 0.1);
+}
+
+.stripe-card-errors {
+    font-size: 0.82rem;
+    color: #f87171;
+    min-height: 1.2em;
+    margin-top: 0.25rem;
+}
+
+.stripe-secure-note {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.25rem;
+}
+
+.stripe-secure-note i {
+    color: var(--accent-gold);
+    font-size: 0.85rem;
+}
