@@ -67,7 +67,7 @@ const PRINTIFY_VARIANT_MAP = {
 
 const PRODUCTS = {
     sakyant: {
-        name: "Sak Yant Tiger",
+        name: "Premium Muay Thai T-Shirt",
         subtitle: "Distressed Golden-Amber Script",
         price: 45.00,
         originalPrice: 55.00,
@@ -82,7 +82,7 @@ const PRODUCTS = {
         ]
     },
     hanuman: {
-        name: "Hanuman's Wrath",
+        name: "Roaring Tiger Head T-shirt",
         subtitle: "Crimson & Charcoal Battle Art",
         price: 45.00,
         originalPrice: 55.00,
@@ -97,7 +97,7 @@ const PRODUCTS = {
         ]
     },
     kaad_chuek: {
-        name: "Kaad Chuek Fists",
+        name: "Muay Thai Fighter T-Shirt King of the Ring",
         subtitle: "Ancient Wrapped Hand Design",
         price: 45.00,
         originalPrice: null,
@@ -112,7 +112,7 @@ const PRODUCTS = {
         ]
     },
     golden_era: {
-        name: "Golden Era Retro",
+        name: "Born Nak Muay Forged in Fire T-Shirt",
         subtitle: "Neon Stadium Tribute",
         price: 45.00,
         originalPrice: 50.00,
