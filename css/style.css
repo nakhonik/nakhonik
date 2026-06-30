@@ -1705,25 +1705,124 @@ img {
         gap: 1rem;
         text-align: center;
     }
+
+    /* Compact Side-by-Side Product Spotlight on Mobile/Tablet */
+    .spotlight-grid {
+        grid-template-columns: 0.95fr 1.05fr;
+        gap: 1rem;
+        align-items: flex-start;
+    }
+    
+    .spotlight-gallery {
+        position: sticky;
+        top: 80px;
+        max-width: 100%;
+        margin: 0;
+    }
+
+    .spotlight-main-img {
+        padding: 0.25rem;
+    }
+
+    .spotlight-main-img img {
+        max-height: 240px;
+        object-fit: contain;
+    }
+
+    .spotlight-detail {
+        gap: 0.25rem;
+    }
+
+    .spotlight-category {
+        font-size: 0.65rem;
+        letter-spacing: 0.15em;
+        margin-bottom: 0.1rem;
+    }
+
+    .spotlight-name {
+        font-size: 0.95rem;
+        margin-bottom: 0.1rem;
+        line-height: 1.2;
+    }
+
+    .spotlight-price {
+        font-size: 1.1rem;
+        margin-bottom: 0.35rem;
+    }
+
+    .spotlight-desc {
+        font-size: 0.75rem;
+        line-height: 1.3;
+        margin-bottom: 0.4rem;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .selectors-group {
+        gap: 0.35rem;
+    }
+
+    .selector-item {
+        margin-bottom: 0.35rem;
+    }
+
+    .selector-title {
+        font-size: 0.7rem;
+        margin-bottom: 0.15rem;
+    }
+
+    .color-options {
+        gap: 0.35rem;
+    }
+
+    .color-dot {
+        width: 20px;
+        height: 20px;
+    }
+
+    .size-options {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.2rem;
+    }
+
+    .size-btn {
+        padding: 0.25rem 0;
+        font-size: 0.7rem;
+    }
+
+    .spotlight-actions {
+        flex-direction: column;
+        gap: 0.35rem;
+        margin-top: 0.35rem;
+        width: 100%;
+    }
+
+    .qty-selector {
+        width: 100%;
+        height: 32px;
+        justify-content: space-between;
+    }
+
+    .qty-btn {
+        padding: 0 0.75rem;
+    }
+
+    .qty-input {
+        font-size: 0.85rem;
+    }
+
+    .spotlight-add-btn {
+        width: 100%;
+        height: 32px;
+        font-size: 0.75rem;
+        padding: 0 0.5rem;
+    }
 }
 
 @media (max-width: 480px) {
-    .spotlight-actions {
-        flex-direction: column;
-    }
-    
-    .qty-selector {
-        width: 100%;
-        justify-content: space-between;
-    }
-    
-    .qty-btn {
-        flex: 1;
-    }
-    
-    .size-options {
-        grid-template-columns: repeat(3, 1fr);
-    }
+    /* Redundant spotlight rules cleaned up as they are handled above */
 }
 
 /* ==========================================
