@@ -19,7 +19,13 @@ app.use(cors({
         if (!origin) return callback(null, true);
         
         const frontendUrl = process.env.FRONTEND_URL;
-        if (origin === frontendUrl || allowedOriginPattern.test(origin)) {
+        const isAllowed = 
+            origin === frontendUrl || 
+            allowedOriginPattern.test(origin) ||
+            origin.endsWith('nakhonik.com') ||
+            origin.endsWith('vercel.app');
+
+        if (isAllowed) {
             return callback(null, true);
         }
         
