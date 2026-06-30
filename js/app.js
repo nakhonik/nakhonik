@@ -42,7 +42,7 @@ const spotlightCategory = document.getElementById("spotlightCategory");
 const spotlightName = document.getElementById("spotlightName");
 const spotlightPrice = document.getElementById("spotlightPrice");
 const spotlightDesc = document.getElementById("spotlightDesc");
-const spotlightStory = document.querySelector("#spotlightStory p");
+
 const colorLabel = document.getElementById("colorLabel");
 const colorSelector = document.getElementById("colorSelector");
 const sizeLabel = document.getElementById("sizeLabel");
@@ -151,7 +151,7 @@ function renderSpotlight() {
     spotlightPrice.innerHTML = `<span>$${product.price.toFixed(2)}</span><span class="price-original">$${product.originalPrice.toFixed(2)}</span>`;
 
     spotlightDesc.textContent = product.desc;
-    spotlightStory.textContent = `"${product.lore}"`;
+
 
     // Render colors dynamically from Printify options
     colorSelector.innerHTML = "";

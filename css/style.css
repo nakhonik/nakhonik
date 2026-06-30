@@ -763,22 +763,7 @@ img {
     margin-bottom: 2rem;
 }
 
-.spotlight-story {
-    background: var(--story-bg);
-    border-left: 3px solid var(--accent-gold);
-    padding: 1.25rem;
-    margin-bottom: 2.5rem;
-    font-style: italic;
-    font-size: 0.95rem;
-}
 
-.spotlight-story h4 {
-    font-style: normal;
-    font-size: 0.85rem;
-    letter-spacing: 0.1em;
-    color: var(--text-primary);
-    margin-bottom: 0.5rem;
-}
 
 .selectors-group {
     display: flex;
