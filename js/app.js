@@ -1,5 +1,5 @@
-const BACKEND_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
-    ? 'http://localhost:3001'
+const BACKEND_URL = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.hostname.startsWith('192.168.'))
+    ? `http://${window.location.hostname}:3001`
     : '';
 
 // ==========================================
@@ -100,25 +100,25 @@ window.addEventListener("scroll", () => {
 function updatePriceAndImage() {
     const product = PRODUCTS[state.activeProductId];
     if (!product || !product.raw) return;
-    
+
     const colorOption = product.raw.options.find(o => o.type === 'color' || o.name.toLowerCase() === 'colors');
     const colorValue = colorOption ? colorOption.values.find(v => v.title === state.activeWash) : null;
     const colorValId = colorValue ? colorValue.id : null;
-    
+
     const sizeOption = product.raw.options.find(o => o.type === 'size' || o.name.toLowerCase() === 'sizes');
     const sizeValue = sizeOption ? sizeOption.values.find(v => v.title === state.activeSize) : null;
     const sizeValId = sizeValue ? sizeValue.id : null;
-    
+
     const matchedVariant = product.raw.variants.find(v => {
         const hasColor = colorValId ? v.options.includes(colorValId) : true;
         const hasSize = sizeValId ? v.options.includes(sizeValId) : true;
         return hasColor && hasSize;
     });
-    
+
     if (matchedVariant) {
         const price = matchedVariant.price / 100;
         spotlightPrice.innerHTML = `<span>$${price.toFixed(2)}</span>`;
-        
+
         // Also update spotlight main image if variant image exists
         const matchedImage = product.raw.images.find(img => img.variant_ids.includes(matchedVariant.id));
         if (matchedImage) {
@@ -146,7 +146,7 @@ function renderSpotlight() {
 
     spotlightCategory.textContent = product.category;
     spotlightName.textContent = product.name;
-    
+
     // Base Price
     spotlightPrice.innerHTML = `<span>$${product.price.toFixed(2)}</span><span class="price-original">$${product.originalPrice.toFixed(2)}</span>`;
 
@@ -160,11 +160,11 @@ function renderSpotlight() {
         btn.className = `color-dot ${wash.name === state.activeWash ? "active" : ""}`;
         btn.setAttribute("data-color", wash.name);
         btn.setAttribute("aria-label", wash.name);
-        
+
         const span = document.createElement("span");
         span.style.backgroundColor = wash.hex;
         btn.appendChild(span);
-        
+
         btn.addEventListener("click", () => {
             colorSelector.querySelectorAll(".color-dot").forEach(d => d.classList.remove("active"));
             btn.classList.add("active");
@@ -185,7 +185,7 @@ function renderSpotlight() {
             btn.className = `size-btn ${sizeVal.title === state.activeSize ? "active" : ""}`;
             btn.setAttribute("data-size", sizeVal.title);
             btn.textContent = sizeVal.title;
-            
+
             btn.addEventListener("click", () => {
                 sizeSelector.querySelectorAll(".size-btn").forEach(b => b.classList.remove("active"));
                 btn.classList.add("active");
@@ -318,9 +318,9 @@ addToCartBtn.addEventListener("click", () => {
     if (!product || !product.raw) return;
 
     // Check if duplicate exists
-    const existingIndex = state.cart.findIndex(item => 
-        item.id === state.activeProductId && 
-        item.wash === state.activeWash && 
+    const existingIndex = state.cart.findIndex(item =>
+        item.id === state.activeProductId &&
+        item.wash === state.activeWash &&
         item.size === state.activeSize
     );
 
@@ -331,17 +331,17 @@ addToCartBtn.addEventListener("click", () => {
         const colorOption = product.raw.options.find(o => o.type === 'color' || o.name.toLowerCase() === 'colors');
         const colorValue = colorOption ? colorOption.values.find(v => v.title === state.activeWash) : null;
         const colorValId = colorValue ? colorValue.id : null;
-        
+
         const sizeOption = product.raw.options.find(o => o.type === 'size' || o.name.toLowerCase() === 'sizes');
         const sizeValue = sizeOption ? sizeOption.values.find(v => v.title === state.activeSize) : null;
         const sizeValId = sizeValue ? sizeValue.id : null;
-        
+
         const matchedVariant = product.raw.variants.find(v => {
             const hasColor = colorValId ? v.options.includes(colorValId) : true;
             const hasSize = sizeValId ? v.options.includes(sizeValId) : true;
             return hasColor && hasSize;
         });
-        
+
         const variantId = matchedVariant ? matchedVariant.id : null;
         const price = matchedVariant ? (matchedVariant.price / 100) : product.price;
         const image = product.raw.images.find(img => img.variant_ids.includes(variantId))?.src || product.image;
@@ -360,7 +360,7 @@ addToCartBtn.addEventListener("click", () => {
     }
 
     saveCart();
-    
+
     // Auto-open cart drawer
     cartDrawer.classList.add("open");
     cartOverlay.classList.add("open");
@@ -422,7 +422,7 @@ function calculateRecommendedSize() {
         // Boxier, drop shoulder look: step up if possible
         if (currentIdx < sizesArr.length - 1) currentIdx++;
     }
-    
+
     size = sizesArr[currentIdx];
 
     // 4. Update UI
@@ -537,11 +537,11 @@ function initStripe() {
 }
 
 // ── Modal DOM references ──────────────────────────────────────────────
-const shippingModal        = document.getElementById('shippingModal');
+const shippingModal = document.getElementById('shippingModal');
 const shippingModalOverlay = document.getElementById('shippingModalOverlay');
-const shippingForm         = document.getElementById('shippingForm');
-const shippingCloseBtn     = document.getElementById('shippingCloseBtn');
-const orderStatusMsg       = document.getElementById('orderStatusMsg');
+const shippingForm = document.getElementById('shippingForm');
+const shippingCloseBtn = document.getElementById('shippingCloseBtn');
+const orderStatusMsg = document.getElementById('orderStatusMsg');
 
 // Open shipping form when customer clicks "Proceed to Checkout"
 checkoutBtn.addEventListener('click', () => {
@@ -577,14 +577,14 @@ shippingForm.addEventListener('submit', async (e) => {
 
     const customerInfo = {
         firstName: document.getElementById('ck-firstName').value.trim(),
-        lastName:  document.getElementById('ck-lastName').value.trim(),
-        email:     document.getElementById('ck-email').value.trim(),
-        phone:     document.getElementById('ck-phone').value.trim(),
-        address:   document.getElementById('ck-address').value.trim(),
-        city:      document.getElementById('ck-city').value.trim(),
-        state:     document.getElementById('ck-state').value.trim(),
-        zip:       document.getElementById('ck-zip').value.trim(),
-        country:   document.getElementById('ck-country').value.trim()
+        lastName: document.getElementById('ck-lastName').value.trim(),
+        email: document.getElementById('ck-email').value.trim(),
+        phone: document.getElementById('ck-phone').value.trim(),
+        address: document.getElementById('ck-address').value.trim(),
+        city: document.getElementById('ck-city').value.trim(),
+        state: document.getElementById('ck-state').value.trim(),
+        zip: document.getElementById('ck-zip').value.trim(),
+        country: document.getElementById('ck-country').value.trim()
     };
 
     // Cart total in dollars
@@ -593,9 +593,9 @@ shippingForm.addEventListener('submit', async (e) => {
     // Map cart to format for backend
     const cartItems = state.cart.map(item => ({
         printifyProductId: item.printifyProductId,
-        variantId:         item.variantId,
-        quantity:          item.qty,
-        title:             item.name
+        variantId: item.variantId,
+        quantity: item.qty,
+        title: item.name
     }));
 
     try {
@@ -697,7 +697,7 @@ checkoutModalOverlay.addEventListener('click', closeCheckoutModal);
 function initTheme() {
     const savedTheme = localStorage.getItem("theme") || "dark";
     const themeIcon = themeToggleBtn.querySelector("i");
-    
+
     if (savedTheme === "light") {
         document.documentElement.classList.add("light-theme");
         document.body.classList.add("light-theme");
@@ -716,7 +716,7 @@ function initTheme() {
 themeToggleBtn.addEventListener("click", () => {
     const isLight = document.documentElement.classList.contains("light-theme");
     const themeIcon = themeToggleBtn.querySelector("i");
-    
+
     if (isLight) {
         document.documentElement.classList.remove("light-theme");
         document.body.classList.remove("light-theme");
@@ -742,12 +742,12 @@ async function fetchProducts() {
         const res = await fetch(`${BACKEND_URL}/api/products`);
         const json = await res.json();
         const data = json.data || [];
-        
+
         if (data.length === 0) {
             document.getElementById("productGrid").innerHTML = "<p style='grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 4rem 0;'>No products found in store.</p>";
             return;
         }
-        
+
         PRODUCTS = {};
         data.forEach(p => {
             let name = p.title;
@@ -757,10 +757,10 @@ async function fetchProducts() {
                 name = parts[0].trim();
                 subtitle = parts[1].trim();
             }
-            
+
             const firstVariant = p.variants.find(v => v.is_enabled) || p.variants[0];
             const basePrice = firstVariant ? (firstVariant.price / 100) : 45.00;
-            
+
             const colorOption = p.options.find(o => o.type === 'color' || o.name.toLowerCase() === 'colors');
             const washes = [];
             if (colorOption) {
@@ -773,7 +773,7 @@ async function fetchProducts() {
             } else {
                 washes.push({ name: "Default Wash", hex: "#18181b" });
             }
-            
+
             PRODUCTS[p.id] = {
                 id: p.id,
                 name: name,
@@ -789,9 +789,9 @@ async function fetchProducts() {
                 raw: p
             };
         });
-        
+
         renderProductGrid();
-        
+
         // Auto set default active product
         const productIds = Object.keys(PRODUCTS);
         if (productIds.length > 0) {
@@ -800,9 +800,9 @@ async function fetchProducts() {
             state.activeWash = activeProd.washes[0].name;
             const sizeOption = activeProd.raw.options.find(o => o.type === 'size' || o.name.toLowerCase() === 'sizes');
             state.activeSize = sizeOption ? sizeOption.values[0].title : "M";
-            
+
             renderSpotlight();
-            
+
             // Dynamic hero image mapping
             const heroFeaturedImage = document.getElementById("heroFeaturedImage");
             if (heroFeaturedImage) {
@@ -810,7 +810,7 @@ async function fetchProducts() {
                 heroFeaturedImage.alt = activeProd.name;
             }
         }
-        
+
     } catch (err) {
         console.error("Failed to load products:", err);
         document.getElementById("productGrid").innerHTML = "<p style='grid-column: 1/-1; text-align: center; color: var(--accent-red); padding: 4rem 0;'>Connection error. Please try again later.</p>";
@@ -820,12 +820,12 @@ async function fetchProducts() {
 function renderProductGrid() {
     const grid = document.getElementById("productGrid");
     grid.innerHTML = "";
-    
+
     Object.values(PRODUCTS).forEach((p, idx) => {
         const card = document.createElement("article");
         card.className = `product-card ${idx === 0 ? "new" : ""}`;
         card.setAttribute("data-id", p.id);
-        
+
         card.innerHTML = `
             ${idx === 0 ? '<span class="product-badge">NEW RELEASE</span>' : ''}
             <div class="product-img-wrapper">
@@ -844,20 +844,20 @@ function renderProductGrid() {
         `;
         grid.appendChild(card);
     });
-    
+
     grid.querySelectorAll(".select-product-trigger").forEach(btn => {
         btn.addEventListener("click", (e) => {
             e.preventDefault();
             const pId = btn.getAttribute("data-product");
             state.activeProductId = pId;
-            
+
             const product = PRODUCTS[pId];
             if (product) {
                 state.activeWash = product.washes[0].name;
                 const sizeOption = product.raw.options.find(o => o.type === 'size' || o.name.toLowerCase() === 'sizes');
                 state.activeSize = sizeOption ? sizeOption.values[0].title : "M";
             }
-            
+
             renderSpotlight();
             document.getElementById("spotlight").scrollIntoView({ behavior: "smooth" });
         });

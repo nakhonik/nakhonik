@@ -10,8 +10,22 @@ require('dotenv').config();
 const app = express();
 const stripeClient = stripe(process.env.STRIPE_SECRET_KEY);
 
-// --- Middleware ---
-app.use(cors({ origin: process.env.FRONTEND_URL || 'http://localhost:5500' }));
+// Allow local dev origins dynamically to prevent CORS blocking issues during testing
+const allowedOriginPattern = /^(https?:\/\/(localhost|127\.0\.0\.1|192\.168\.\d+\.\d+|10\.\d+\.\d+\.\d+)(:\d+)?|null)$/;
+
+app.use(cors({
+    origin: (origin, callback) => {
+        // Allow requests with no origin (like mobile apps, curl, or server-to-server)
+        if (!origin) return callback(null, true);
+        
+        const frontendUrl = process.env.FRONTEND_URL;
+        if (origin === frontendUrl || allowedOriginPattern.test(origin)) {
+            return callback(null, true);
+        }
+        
+        callback(new Error('Not allowed by CORS'));
+    }
+}));
 app.use(express.json());
 
 const PRINTIFY_BASE = 'https://api.printify.com/v1';
