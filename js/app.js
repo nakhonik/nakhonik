@@ -654,7 +654,7 @@ shippingForm.addEventListener('submit', async (e) => {
 
         if (orderData.success) {
             // ── SUCCESS ──
-            orderStatusMsg.textContent = `✅ Payment confirmed! Order #${orderData.orderId} is now being prepared in Bangkok.`;
+            orderStatusMsg.textContent = `✅ Payment confirmed! Order #${orderData.orderId} is now being prepared.`;
             orderStatusMsg.classList.add('success');
             state.cart = [];
             saveCart();
@@ -774,6 +774,14 @@ async function fetchProducts() {
                 washes.push({ name: "Default Wash", hex: "#18181b" });
             }
 
+            // Sanitize description to remove references to screen-printed by hand in Thailand / made in Thailand
+            let description = p.description || "";
+            description = description
+                .replace(/silk-screened by hand in Thailand/gi, "printed in the USA")
+                .replace(/crafted in Thailand/gi, "printed in the USA")
+                .replace(/made in Thailand/gi, "printed in the USA")
+                .replace(/screen-printed in Thailand/gi, "printed in the USA");
+
             PRODUCTS[p.id] = {
                 id: p.id,
                 name: name,
@@ -783,8 +791,8 @@ async function fetchProducts() {
                 category: p.tags.includes("Legends") ? "LEGENDS SERIES" : "HEAVYWEIGHT SERIES",
                 image: p.images.find(img => img.is_default)?.src || p.images[0].src,
                 printifyProductId: p.id,
-                desc: p.description.split("\n")[0] || "Premium combat clothing crafted for nak muays.",
-                lore: p.description.includes("🐅") ? p.description.split("🐅")[1] || "Wear the heritage." : "Designed for fighters who value lineage, power, and ultimate durability.",
+                desc: description.split("\n")[0] || "Premium combat clothing crafted for nak muays.",
+                lore: description.includes("🐅") ? description.split("🐅")[1] || "Wear the heritage." : "Designed for fighters who value lineage, power, and ultimate durability.",
                 washes: washes,
                 raw: p
             };

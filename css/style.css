@@ -443,11 +443,21 @@ img {
 }
 
 .hero-desc {
-    font-size: 1.1rem;
-    color: var(--text-secondary);
-    max-width: 550px;
-    margin-bottom: 3rem;
+    font-size: clamp(1rem, 2.5vw, 1.25rem);
+    color: var(--text-primary);
+    max-width: 580px;
+    margin-bottom: 1rem;
+    line-height: 1.5;
     animation: fadeInUp 0.8s ease-out 0.4s both;
+}
+
+.hero-paragraph {
+    font-size: clamp(0.85rem, 2vw, 0.95rem);
+    color: var(--text-secondary);
+    max-width: 580px;
+    margin-bottom: 2.5rem;
+    line-height: 1.6;
+    animation: fadeInUp 0.8s ease-out 0.5s both;
 }
 
 .hero-cta {
