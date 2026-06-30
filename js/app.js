@@ -751,7 +751,7 @@ async function fetchProducts() {
         PRODUCTS = {};
         data.forEach(p => {
             let name = p.title;
-            let subtitle = "Premium Combat Couture";
+            let subtitle = "THAI HERITAGE. FIGHTER'S SPIRIT.";
             if (p.title.includes("|")) {
                 const parts = p.title.split("|");
                 name = parts[0].trim();
