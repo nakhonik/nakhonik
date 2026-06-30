@@ -1,3 +1,10 @@
+@font-face {
+    font-family: 'Sport Break';
+    src: url('../assets/fonts/SportBreak.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Syne:wght@700;800&display=swap');
 
 /* ==========================================
@@ -23,7 +30,7 @@
     --border-color: rgba(255, 255, 255, 0.08);
     --border-highlight: rgba(255, 184, 0, 0.15);
     
-    --font-heading: 'Syne', sans-serif;
+    --font-heading: 'Sport Break', 'Syne', sans-serif;
     --font-body: 'Inter', sans-serif;
     
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
