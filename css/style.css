@@ -221,7 +221,7 @@ img {
 }
 
 .section-title {
-    font-family: var(--font-body);
+    font-family: var(--font-heading);
     font-weight: 800;
     font-size: clamp(1.4rem, 3vw, 2rem);
     text-align: center;
