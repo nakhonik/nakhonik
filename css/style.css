@@ -900,6 +900,28 @@ img {
     justify-content: center;
 }
 
+.trust-badges {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--border-color);
+    width: 100%;
+}
+
+.badge-item {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
 /* ==========================================
    INTERACTIVE SIZE FINDER
    ========================================== */
@@ -1836,6 +1858,14 @@ img {
         height: 34px;
         font-size: 0.75rem;
         padding: 0 0.75rem;
+    }
+
+    .trust-badges {
+        justify-content: center;
+        gap: 1.25rem;
+        margin-top: 1rem;
+        padding-top: 1rem;
+        flex-wrap: wrap;
     }
 }
 

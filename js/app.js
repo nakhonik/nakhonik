@@ -788,7 +788,7 @@ async function fetchProducts() {
                 subtitle: subtitle,
                 price: basePrice,
                 originalPrice: basePrice * 1.25,
-                category: p.tags.includes("Legends") ? "LEGENDS SERIES" : "HEAVYWEIGHT SERIES",
+                category: p.tags.includes("Legends") ? "LEGENDS SERIES" : "FIGHTER SERIES",
                 image: p.images.find(img => img.is_default)?.src || p.images[0].src,
                 printifyProductId: p.id,
                 desc: description.split("\n")[0] || "Premium combat clothing crafted for nak muays.",
