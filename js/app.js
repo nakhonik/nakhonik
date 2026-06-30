@@ -816,6 +816,7 @@ async function fetchProducts() {
             if (heroFeaturedImage) {
                 heroFeaturedImage.src = activeProd.image;
                 heroFeaturedImage.alt = activeProd.name;
+                heroFeaturedImage.style.opacity = 1;
             }
         }
 
