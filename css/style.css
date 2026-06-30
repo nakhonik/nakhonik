@@ -443,8 +443,7 @@ img {
 
 .hero-title span {
     display: block;
-    color: transparent;
-    -webkit-text-stroke: 1px var(--hero-title-stroke);
+    color: var(--accent-gold);
 }
 
 .hero-desc {
