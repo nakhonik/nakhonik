@@ -446,6 +446,17 @@ img {
     color: var(--accent-gold);
 }
 
+.hero-subtitle {
+    font-family: var(--font-heading);
+    font-size: clamp(1rem, 2.8vw, 1.35rem);
+    font-weight: 700;
+    color: var(--accent-gold);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 1.25rem;
+    animation: fadeInUp 0.8s ease-out 0.3s both;
+}
+
 .hero-desc {
     font-size: clamp(1rem, 2.5vw, 1.25rem);
     color: var(--text-primary);
