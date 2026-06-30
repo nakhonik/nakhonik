@@ -156,9 +156,9 @@ img {
     font-family: var(--font-heading);
     font-weight: 800;
     text-transform: uppercase;
-    padding: 1rem 2.5rem;
+    padding: 0.75rem 1.75rem;
     border-radius: 0;
-    font-size: 0.95rem;
+    font-size: 0.85rem;
     letter-spacing: 0.05em;
     position: relative;
     overflow: hidden;
@@ -167,6 +167,7 @@ img {
     align-items: center;
     gap: 0.75rem;
     border: 1px solid var(--accent-gold);
+    white-space: nowrap;
 }
 
 .btn-primary::before {
@@ -198,12 +199,13 @@ img {
     font-family: var(--font-heading);
     font-weight: 800;
     text-transform: uppercase;
-    padding: 1rem 2.5rem;
-    font-size: 0.95rem;
+    padding: 0.75rem 1.75rem;
+    font-size: 0.85rem;
     letter-spacing: 0.05em;
     display: inline-flex;
     align-items: center;
     gap: 0.75rem;
+    white-space: nowrap;
 }
 
 .btn-secondary:hover {
@@ -463,6 +465,7 @@ img {
 .hero-cta {
     display: flex;
     gap: 1.5rem;
+    flex-wrap: wrap;
     animation: fadeInUp 0.8s ease-out 0.6s both;
 }
 
@@ -1647,6 +1650,22 @@ img {
         padding: 0 1.5rem;
     }
     
+    .hero-cta {
+        flex-direction: column;
+        width: 100%;
+        align-items: center;
+        gap: 1rem;
+        margin: 0 auto;
+    }
+    
+    .hero-cta .btn-primary,
+    .hero-cta .btn-secondary {
+        width: 100%;
+        max-width: 320px;
+        justify-content: center;
+        padding: 0.75rem 1.5rem;
+    }
+    
     .nav-menu {
         display: none; /* In production, we'd add a mobile menu toggle, but let's keep it simple for now */
     }
@@ -1692,16 +1711,6 @@ img {
 }
 
 @media (max-width: 480px) {
-    .hero-cta {
-        flex-direction: column;
-        width: 100%;
-    }
-    
-    .hero-cta .btn {
-        width: 100%;
-        justify-content: center;
-    }
-    
     .spotlight-actions {
         flex-direction: column;
     }
