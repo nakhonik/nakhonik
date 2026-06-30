@@ -430,9 +430,9 @@ img {
 }
 
 .hero-title {
-    font-size: clamp(3rem, 7vw, 5.5rem);
-    line-height: 0.95;
-    margin-bottom: 2rem;
+    font-size: clamp(2.2rem, 5.5vw, 4rem);
+    line-height: 1.05;
+    margin-bottom: 1.5rem;
     animation: fadeInUp 0.8s ease-out 0.2s both;
 }
 
